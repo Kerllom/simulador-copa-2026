@@ -1,0 +1,20 @@
+-- =============================================================
+-- SCHEMA DO BANCO DE DADOS - COPA DO MUNDO 2026
+-- =============================================================
+-- RESPONSAVEL: Ricardo
+--
+-- Este arquivo deve conter os scripts CREATE TABLE para todas
+-- as entidades do projeto:
+--   - selecoes
+--   - grupos
+--   - partidas
+--   - gols
+--   - fases (pode ser ENUM ou tabela)
+--
+-- Lembrar de:
+--   - Foreign Keys com nomes claros
+--   - Indices em colunas consultadas frequentemente
+--   - CHARSET utf8mb4 para suportar acentos
+-- =============================================================
+
+-- TODO: Ricardo preenche aqui o schema final.

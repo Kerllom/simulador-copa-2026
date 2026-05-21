@@ -1,0 +1,11 @@
+-- =============================================================
+-- SEED - DADOS INICIAIS - COPA DO MUNDO 2026
+-- =============================================================
+-- RESPONSAVEL: Ricardo
+--
+-- Este arquivo deve conter os INSERTs com as 48 selecoes
+-- classificadas para a Copa do Mundo de 2026, divididas em
+-- 12 grupos de 4 selecoes (Grupos A ate L).
+-- =============================================================
+
+-- TODO: Ricardo preenche aqui o seed das 48 selecoes.

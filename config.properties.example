@@ -1,0 +1,13 @@
+# =============================================================
+# CONFIGURACAO DO BANCO DE DADOS - EXEMPLO
+# =============================================================
+# Copie este arquivo para "config.properties" e preencha
+# com suas credenciais locais do MySQL.
+#
+# IMPORTANTE: o arquivo config.properties (sem .example) esta
+# no .gitignore e NAO deve ser commitado.
+# =============================================================
+
+db.url=jdbc:mysql://localhost:3306/copa2026?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+db.user=root
+db.password=sua_senha_aqui
