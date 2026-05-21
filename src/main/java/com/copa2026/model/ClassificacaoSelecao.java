@@ -74,7 +74,9 @@ public class ClassificacaoSelecao {
         this.golsPro = golsPro;
     }
 
-    public Selecao getSelecao(){return selecao}
+    public Selecao getSelecao(){
+        return selecao;
+    }
 
 
 }

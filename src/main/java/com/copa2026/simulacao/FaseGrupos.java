@@ -84,13 +84,25 @@ public class FaseGrupos {
             fichaVisitante.setGolsPro(fichaVisitante.getGolsPro() + partida.getGolsVisitante());
             fichaVisitante.setGolsContra(fichaVisitante.getGolsContra() + partida.getGolsCasa());
 
+            fichaCasa.setJogosDisputados(fichaCasa.getJogosDisputados() + 1);
+            fichaVisitante.setJogosDisputados(fichaVisitante.getJogosDisputados() + 1);
+
             if (partida.getGolsCasa() > partida.getGolsVisitante()) {
+                //Vitória da casa
                 fichaCasa.setPontos(fichaCasa.getPontos() + 3);
+                fichaCasa.setVitorias(fichaCasa.getVitorias() + 1);
+                fichaVisitante.setDerrotas(fichaVisitante.getDerrotas() + 1);
             } else if (partida.getGolsCasa() < partida.getGolsVisitante()) {
+                // Vitória do visitante
                 fichaVisitante.setPontos(fichaVisitante.getPontos() + 3);
+                fichaVisitante.setVitorias(fichaVisitante.getVitorias() + 1);
+                fichaCasa.setDerrotas(fichaCasa.getDerrotas() + 1);
             } else {
+                // Empate
                 fichaCasa.setPontos(fichaCasa.getPontos() + 1);
                 fichaVisitante.setPontos(fichaVisitante.getPontos() + 1);
+                fichaCasa.setEmpates(fichaCasa.getEmpates() + 1);
+                fichaVisitante.setEmpates(fichaVisitante.getEmpates() + 1);
             }
         }
 
