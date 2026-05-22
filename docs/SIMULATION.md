@@ -1,25 +1,22 @@
-# Documentação do Algoritmo de Simulação
+# Algoritmo de Simulação — Copa do Mundo 2026
 
-> Este documento será preenchido pelo Kerllom após implementar o motor de simulação.
+## Visão Geral
 
-## Critério de geração de resultados
+O sistema simula partidas usando um **algoritmo aleatório ponderado pela força histórica das confederações**. Em vez de um sorteio puro (onde Nova Caledônia teria a mesma chance que o Brasil), aplicamos um fator multiplicador baseado no desempenho das confederações em Copas do Mundo passadas.
 
-A definir entre:
-- [ ] Aleatório puro
-- [ ] Baseado em ranking FIFA
+## Fator de Confederação
 
-## Distribuição de gols
+Cada confederação tem um fator multiplicador aplicado à "expectativa de gols" da seleção:
 
-A definir.
+| Confederação | Fator | Justificativa |
+|---|---|---|
+| **UEFA** (Europa) | 1.20 | 12 títulos mundiais, dominante histórica |
+| **CONMEBOL** (Am. Sul) | 1.20 | 10 títulos mundiais, dominante histórica |
+| **CONCACAF** (Am. Norte/Central) | 0.85 | México e EUA têm bom nível |
+| **AFC** (Ásia) | 0.80 | Japão e Coreia do Sul vêm crescendo |
+| **CAF** (África) | 0.80 | Marrocos chegou na semi em 2022 |
+| **OFC** (Oceania) | 0.55 | Nível historicamente mais baixo |
 
-## Decisão de pênaltis (fase eliminatória)
+## Cálculo de Gols por Time
 
-A definir.
-
-## Critérios de desempate na fase de grupos
-
-Padrão FIFA:
-1. Pontos
-2. Saldo de gols
-3. Gols pró
-4. Confronto direto
+Para cada seleção em uma partida, o número de gols é calculado assim:
