@@ -150,12 +150,8 @@ public class MenuCLI {
         System.out.println(VERDE + "[OK] " + partidasGrupos.size() + " partidas simuladas na fase de grupos." + RESET);
 
         System.out.println("\n" + AMARELO + ">> Coletando classificados..." + RESET);
-        List<Selecao> classificados = new ArrayList<>();
-        for (Grupo grupo : grupos) {
-            List<Partida> partidasDoGrupo = filtrarPartidasDoGrupo(grupo, partidasGrupos);
-            List<Selecao> top2 = faseGrupos.getClassificados(grupo, partidasDoGrupo);
-            classificados.addAll(top2);
-        }
+        System.out.println("\n" + AMARELO + ">> Coletando classificados..." + RESET);
+        List<Selecao> classificados = coletar16Classificados();
         System.out.println(VERDE + "[OK] " + classificados.size() + " selecoes classificadas para as oitavas." + RESET);
 
         System.out.println("\n" + AMARELO + ">> Simulando fase eliminatoria..." + RESET);
@@ -184,6 +180,43 @@ public class MenuCLI {
 
         simulacaoExecutada = true;
         System.out.println("\n" + VERDE + ">> Simulacao concluida com sucesso!" + RESET);
+    }
+
+    /**
+     * Coleta os 16 classificados para a fase eliminatoria:
+     * - 12 primeiros colocados de cada grupo
+     * - 4 melhores segundos colocados (por pontos -> saldo -> gols pro)
+     */
+    private List<Selecao> coletar16Classificados() {
+        List<ClassificacaoSelecao> primeiros = new ArrayList<>();
+        List<ClassificacaoSelecao> segundos = new ArrayList<>();
+
+        for (Grupo grupo : grupos) {
+            List<Partida> partidasDoGrupo = filtrarPartidasDoGrupo(grupo, partidasGrupos);
+            List<ClassificacaoSelecao> tabela = montarTabelaCompleta(grupo, partidasDoGrupo);
+
+            // 1o lugar do grupo
+            primeiros.add(tabela.get(0));
+            // 2o lugar do grupo
+            segundos.add(tabela.get(1));
+        }
+
+        // Ordena os 12 segundos colocados pelos mesmos criterios FIFA
+        segundos.sort(Comparator
+                .comparingInt(ClassificacaoSelecao::getPontos).reversed()
+                .thenComparingInt(ClassificacaoSelecao::getSaldoDeGols).reversed()
+                .thenComparingInt(ClassificacaoSelecao::getGolsPro).reversed());
+
+        // Monta a lista final: 12 primeiros + 4 melhores segundos
+        List<Selecao> classificados = new ArrayList<>();
+        for (ClassificacaoSelecao c : primeiros) {
+            classificados.add(c.getSelecao());
+        }
+        for (int i = 0; i < 4 && i < segundos.size(); i++) {
+            classificados.add(segundos.get(i).getSelecao());
+        }
+
+        return classificados;
     }
 
     private void exibirClassificacaoGrupos() {
@@ -413,7 +446,7 @@ public class MenuCLI {
         System.out.println("\n" + CIANO + BORDA_TOPO + RESET);
         System.out.println(CIANO + LATERAL + RESET + centralizar("Obrigado por usar o Simulador da Copa 2026!", 66) + CIANO + LATERAL + RESET);
         System.out.println(CIANO + BORDA_BASE + RESET);
-    }S
+    }
 
     private String centralizar(String texto, int largura) {
         int tamanho = textoSemAnsi(texto).length();
